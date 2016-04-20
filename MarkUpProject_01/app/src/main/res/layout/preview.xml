@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView1"
+        android:text="Preview :"
+        android:layout_below="@+id/editText"
+        android:paddingTop="10dp" />
+
+
+
+    <us.feras.mdv.MarkdownView
+        android:id="@+id/markdownView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView1"
+        android:scrollIndicators="bottom|top"
+        android:background="#73ce8b" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update"
+        android:id="@+id/createbtn"
+        android:layout_below="@+id/markdownView"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignEnd="@+id/textView1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Version"
+        android:id="@+id/updatebtn"
+        android:layout_toRightOf="@+id/createbtn"
+        android:layout_below="@+id/markdownView"
+        android:layout_toLeftOf="@+id/createbtn"
+        android:layout_toStartOf="@+id/createbtn" />
+
+
+</RelativeLayout>
