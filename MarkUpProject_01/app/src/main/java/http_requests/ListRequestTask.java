@@ -35,6 +35,7 @@ public class ListRequestTask extends AsyncTask<String, Integer, List<ListRequest
     public ListRequestTask(Context context, ListView listview, String token) {
         this.listview = listview;
         this.context = context;
+
         this.token = token;
     }
 
@@ -65,6 +66,7 @@ public class ListRequestTask extends AsyncTask<String, Integer, List<ListRequest
             HttpURLConnection connection =(HttpURLConnection) object.openConnection();
 
             connection.setRequestMethod("GET");
+
 
             connection.setRequestProperty("Authorization", "Bearer " + token);
             connection.setDoInput(true);
@@ -127,6 +129,7 @@ public class ListRequestTask extends AsyncTask<String, Integer, List<ListRequest
 //                context.startActivity(intent);
                 Intent intent= new Intent(context, VersionListActivity.class);
                 int selected_id = Integer.parseInt(data.get(position).get("id"));
+
                 intent.putExtra("position", selected_id);
                 context.startActivity(intent);
             }

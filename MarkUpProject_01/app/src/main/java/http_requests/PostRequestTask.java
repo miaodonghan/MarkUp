@@ -22,7 +22,6 @@ public class PostRequestTask extends AsyncTask<String, Integer, String> {
 
     Context context;
     int doc_id;
-
     String ip;
     String token;
     SharedPreferences sharedPreferences;
@@ -34,6 +33,7 @@ public class PostRequestTask extends AsyncTask<String, Integer, String> {
         this.ip = ip;
         this.doc_id = doc_id;
         this.sharedPreferences = context.getSharedPreferences(LoginActivity.Markup, Context.MODE_PRIVATE);
+
     }
 
     @Override

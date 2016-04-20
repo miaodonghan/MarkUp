@@ -45,6 +45,7 @@ public class RegisterRequestTask extends AsyncTask<String, Integer, String> {
         String result = "";
 
         HttpURLConnection urlConnection = null;
+
         try {
 
             URL url = new URL( ip+ "/api/auth/register");
@@ -71,6 +72,7 @@ public class RegisterRequestTask extends AsyncTask<String, Integer, String> {
             out.flush();
             out.close();
             Log.e("RegisterRequestTask", requestData);
+
 
            // Log.i("err222",urlConnection.getResponseCode()+"");
             // if user has register, response code is 400(bad request)

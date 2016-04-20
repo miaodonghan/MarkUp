@@ -18,7 +18,7 @@ import http_requests.LoginRequestTask;
 
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String Markup = "markup";
+    public static final String Markup ="markup";
     public static final String Email_s = "email";
     public static final String Password_s = "password";
     public static final String Token_s = "token";
@@ -31,14 +31,17 @@ public class LoginActivity extends AppCompatActivity {
     String email;
     String pwd;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+
         email_login = (EditText) findViewById(R.id.email_login);
         pwd_login = (EditText) findViewById(R.id.pwd_login);
         login_btn = (Button) findViewById(R.id.login_btn);
+
         regist_link = (TextView) findViewById(R.id.register_link);
 
         sharedPreferences = getSharedPreferences(Markup, Context.MODE_PRIVATE);
@@ -58,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
                 Log.i("LoginActivity", email_login.getText().toString());
                 email = email_login.getText().toString();
 
@@ -86,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
         email_login.setText(sharedPreferences.getString(Email_s, null));
         pwd_login.setText(sharedPreferences.getString(Password_s, null));
 
@@ -106,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 String ip = getString(R.string.ip_address);
                 LoginRequestTask loginRequestTask = new LoginRequestTask(LoginActivity.this, ip);
                 Log.e("LoginActivity::", ip + "/api/auth/login");
+
                 loginRequestTask.execute(email, pwd);
 
             }

@@ -40,6 +40,7 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
 
     static class VersionItem {
         public VersionItem(String id, String name, String content, String updatedAt) {
+
             this.id = id;
             this.name = name;
             this.content = content;
@@ -55,6 +56,7 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
     @Override
     protected void onPreExecute() {
         // start a spinning sign
+
     }
 
     @Override
@@ -75,6 +77,7 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
                     obj.getString("name"),
                     obj.getString("content"),
                     obj.getString("updatedAt")
+
                 );
                 docList.add(item);
 
@@ -90,12 +93,13 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
     @Override
     protected void onPostExecute(List<VersionListRequestTask.VersionItem> docList) {
 
-        // close a spinning sign
+
         for (int i = 0; i < docList.size(); i++) {
             Map<String, String> map = new HashMap<>();
             map.put("id", docList.get(i).id);
             map.put("name", docList.get(i).name);
             map.put("content", docList.get(i).content);
+
             map.put("updatedAt", docList.get(i).updatedAt);
             data_version.add(map);
         }
@@ -103,6 +107,7 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
         SimpleAdapter adapter = new SimpleAdapter(context, data_version,
             R.layout.version_item, new String[]{"id", "name", "content", "updatedAt"},
             new int[]{R.id.version_id, R.id.version_name, R.id.version_content, R.id.version_updatedAt}
+
         );
 
         listview.setAdapter(adapter);
@@ -116,6 +121,7 @@ public class VersionListRequestTask extends AsyncTask<String, Integer, List<Vers
             intent.putExtra("version_position", version_selected_id);
             intent.putExtra("doc_position", doc_id);
             context.startActivity(intent);
+
             }
 
         });

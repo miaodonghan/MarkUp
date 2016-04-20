@@ -30,6 +30,7 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
 
     public PutRequestTask(Context context, int version_id, String ip, int doc_id) {
 
+
         this.context = context;
         this.version_id = version_id;
 

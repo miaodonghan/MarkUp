@@ -25,12 +25,9 @@ public class Document {
         this.body = body;
     }
 
-    public void document() {
-
-    }
+    public Document() {}
 
     public void setHeader(int line, MarkdownView markdownView, EditText editor) {
-
         //get current line text
         String text = editor.getText().toString();
         int lineStart = editor.getLayout().getLineStart(line);
@@ -51,22 +48,19 @@ public class Document {
         } else if (lineText.charAt(2) == '#') {
             editor.setText(frontText + lineText.substring(4, lineText.length()) + behindText);
         }
-
     }
 
     public void setBold(int line, EditText editor, MarkdownView markdownView) {
-
-
         int start_selected = editor.getSelectionStart();
         int end_selected = editor.getSelectionEnd();
 
         if (start_selected != end_selected) {
+
             String text = editor.getText().toString();
 
             int lineStart = editor.getLayout().getLineStart(line);
             int end = editor.getLayout().getLineEnd(line);
             String lineText = text.substring(lineStart, end);
-
             String frontText = notSelectedFrontTextHandler(editor, start_selected);
             String behindText = notSelectedBehindTextHandler(editor, end_selected);
             String selectedText = text.substring(start_selected, end_selected);
@@ -82,11 +76,13 @@ public class Document {
                 editor.setText(frontText + "__" + selectedText + "__" + behindText);
             } else {
                 String s = selectedText.substring(2, selectedText.length() - 2).replace('_', ' ');
+
                 editor.setText(frontText + s + behindText);
             }
 
         }
     }
+
 
 
     public void setQuote(int line, EditText editor, MarkdownView markdownView) {
@@ -110,6 +106,7 @@ public class Document {
         if (lineText.charAt(0) != '>') {
             editor.setText(frontText + "> " + lineText + behindText);
         } else {
+
             editor.setText(frontText + lineText.substring(2, lineText.length()) + behindText);
         }
     }
@@ -134,12 +131,14 @@ public class Document {
         if (lineText.charAt(0) != '*') {
             editor.setText(frontText + "* " + lineText + behindText);
         } else {
+
             editor.setText(frontText + lineText.substring(2, lineText.length()) + behindText);
         }
     }
 
 
     public String notSelectedFrontTextHandler(EditText editor, int start) {
+
         String text = editor.getText().toString();
         String frontText;
         if (start != 0) {
@@ -157,10 +156,10 @@ public class Document {
             behindText = text.substring(end, editor.length());
         } else {
             behindText = "";
+
         }
 
         return behindText;
     }
-
 
 }

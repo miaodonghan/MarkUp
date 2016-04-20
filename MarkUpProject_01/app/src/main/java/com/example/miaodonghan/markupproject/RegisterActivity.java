@@ -124,8 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 String ip = getString(R.string.ip_address);
-
                 RegisterRequestTask registerRequestTask = new RegisterRequestTask(RegisterActivity.this,ip);
+
                 Log.e("IPPPPPPPPL::", ip + "/api/auth/register");
                // (new RegisterRequestTask(RegisterActivity.this, email_r, p1_r, ip)).execute(ip + "/api/auth/register");
                 registerRequestTask.execute(email_r, p1_r);

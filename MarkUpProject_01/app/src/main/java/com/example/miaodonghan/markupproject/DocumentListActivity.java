@@ -32,6 +32,7 @@ public class DocumentListActivity extends AppCompatActivity {
         token = sharedPreferences.getString(LoginActivity.Token_s, null);
         (new ListRequestTask(this, listview, token)).execute(ip + "/api/doc");
 
+
     }
 
     @Override
@@ -48,11 +49,13 @@ public class DocumentListActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Toast.makeText(this, "Goto LoginActivity page", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, LoginActivity.class);
+
                 startActivity(intent);
                 break;
             default:
                 break;
         }
+
         return true;
     }
 

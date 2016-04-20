@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static String editor_content = "";
     SharedPreferences sharedPreferences;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         quotebtn = (Button) findViewById(R.id.quotebtn);
         quotebtn.setOnTouchListener(new quotebtnTouchListener());
         listbtn = (Button) findViewById(R.id.listbtn);
+
         listbtn.setOnTouchListener(new listbtnTouchListener());
 
 
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 //Your query to fetch Data
             }
 
@@ -188,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case DragEvent.ACTION_DROP:
                     switch (msg) {
+
                         case "headerbtn":
                             handleHeaderbtn();
                             break;
@@ -201,9 +205,9 @@ public class MainActivity extends AppCompatActivity {
                             handleListbtn();
                             break;
                     }
-
                     // Dropped, reassign View to ViewGroup
                     Toast.makeText(MainActivity.this, "drag drop", Toast.LENGTH_SHORT).show();
+
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
 
@@ -222,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleBoldbtn() {
+
         MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
         int lineNum = getCurrentCursorLine(editor);
         doc.setBold(lineNum, editor, markdownView);
@@ -237,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
         int lineNum = getCurrentCursorLine(editor);
         doc.setList(lineNum, editor, markdownView);
+
     }
 
 
@@ -271,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
                 //putRequestTask.execute(""+version_id,content);
                 Toast.makeText(MainActivity.this, "save successfully", Toast.LENGTH_LONG).show();
             } else {
+
                 Toast.makeText(MainActivity.this, "Please LoginActivity first!", Toast.LENGTH_LONG).show();
             }
 
@@ -283,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
             PostRequestTask postRequestTask = new PostRequestTask(MainActivity.this, ip, doc_id);
 
+
             String text = editor.getText().toString();
             int start = editor.getLayout().getLineStart(0);
             int end = editor.getLayout().getLineStart(1);
@@ -294,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 postRequestTask.execute(name, content);
                 Toast.makeText(MainActivity.this, "you created a new version successfully", Toast.LENGTH_LONG).show();
             } else {
+
                 Toast.makeText(MainActivity.this, "Please LoginActivity first!", Toast.LENGTH_LONG).show();
             }
 
@@ -309,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("docId", doc_id);
             intent.putExtra("versionId", version_id);
             startActivity(intent);
+
 
         }
     };

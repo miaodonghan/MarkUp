@@ -35,6 +35,7 @@ public class LoginRequestTask extends AsyncTask<String, Integer, String> {
         this.context = context;
         this.ip = ip;
         this.sharedPreferences = context.getSharedPreferences(LoginActivity.Markup, Context.MODE_PRIVATE);
+
     }
 
     @Override
@@ -46,6 +47,7 @@ public class LoginRequestTask extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... data) {
         String result = "";
         HttpURLConnection urlConnection = null;
+
         try {
 
             URL url = new URL(ip + "/api/auth/login");
@@ -73,24 +75,29 @@ public class LoginRequestTask extends AsyncTask<String, Integer, String> {
             Log.e("LoginRequestTask", requestData);
 
 
+
 //            InputStream e1 = new BufferedInputStream(urlConnection.getErrorStream());
 //            Scanner s1 = new Scanner(e1).useDelimiter("\\A");
 //            error = s1.hasNext() ? s1.next() : "";
             error_code = urlConnection.getResponseCode();
+
             if (error_code == 403) {
                 Log.e("error code:", urlConnection.getResponseCode() + "");
                 return result;
             } else {
+
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 Scanner s = new Scanner(in).useDelimiter("\\A");
                 res = s.hasNext() ? s.next() : "";
                 result = res;
                 Log.e("login response:", res);
+
                 return res;
             }
 
         } catch (Exception ex) {
             Log.e("error", ex.toString());
+
         } finally {
             urlConnection.disconnect();
         }
@@ -110,6 +117,7 @@ public class LoginRequestTask extends AsyncTask<String, Integer, String> {
 
             try {
                 JSONObject r = new JSONObject(result);
+
                 token = r.getString("token");
                 expires = r.getString("expires");
             } catch (JSONException e) {
@@ -118,6 +126,7 @@ public class LoginRequestTask extends AsyncTask<String, Integer, String> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(LoginActivity.Token_s, token);
             editor.putString(LoginActivity.Expires_s, expires);
+
             editor.commit();
 
             context.startActivity(intent);

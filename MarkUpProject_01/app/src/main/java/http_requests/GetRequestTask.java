@@ -19,6 +19,7 @@ public class GetRequestTask extends AsyncTask<String, Integer, String> {
     public GetRequestTask(Context context, EditText editor) {
         this.context = context;
         this.editor = editor;
+
     }
 
     @Override
@@ -29,6 +30,7 @@ public class GetRequestTask extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... uri) {
         String result = "";
+
         try {
 
             InputStream response = new URL(uri[0]).openStream();
@@ -38,12 +40,14 @@ public class GetRequestTask extends AsyncTask<String, Integer, String> {
             Log.e("GetRequest", res);
 
 
+
             JSONObject obj = new JSONObject(res);
 
             result = obj.getString("name") + "\n\n" + obj.getString("content");
 
         } catch (Exception ex) {
             Log.e("background task", ex.getMessage());
+
         }
 
         return result;
@@ -52,5 +56,6 @@ public class GetRequestTask extends AsyncTask<String, Integer, String> {
     //@Override
     protected void onPostExecute(String result) {
         editor.setText(result);
+
     }
 }

@@ -20,6 +20,7 @@ public class VersionGetRequestTask extends AsyncTask<String, Integer, String> {
     public VersionGetRequestTask(Context context, EditText editor) {
         this.context = context;
         this.editor = editor;
+
     }
 
     @Override
@@ -30,6 +31,7 @@ public class VersionGetRequestTask extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... uri) {
         String result = "";
+
         try {
 
             InputStream response = new URL(uri[0]).openStream();
@@ -41,11 +43,13 @@ public class VersionGetRequestTask extends AsyncTask<String, Integer, String> {
 
 
             result = "#" + obj.getString("name") + "\n\nupdate Time :  " + obj.getString("updatedAt") + "\n\n" +
+
                     obj.getString("content");
 
 
         } catch (Exception ex) {
             Log.e("backgroud task", ex.getMessage());
+
         }
 
         return result;

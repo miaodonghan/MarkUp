@@ -18,6 +18,7 @@ public class ShowPreviewActivity extends AppCompatActivity {
     int version_id;
     int doc_id;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
