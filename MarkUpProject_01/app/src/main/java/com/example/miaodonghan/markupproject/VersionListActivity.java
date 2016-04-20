@@ -1,4 +1,4 @@
-package com.example.miaodonghan.markupproject_01;
+package com.example.miaodonghan.markupproject;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

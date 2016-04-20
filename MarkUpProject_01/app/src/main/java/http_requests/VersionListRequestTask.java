@@ -9,8 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.example.miaodonghan.markupproject_01.MainActivity;
-import com.example.miaodonghan.markupproject_01.R;
+import com.example.miaodonghan.markupproject.MainActivity;
+import com.example.miaodonghan.markupproject.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

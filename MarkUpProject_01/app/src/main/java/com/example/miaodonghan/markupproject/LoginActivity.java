@@ -1,4 +1,4 @@
-package com.example.miaodonghan.markupproject_01;
+package com.example.miaodonghan.markupproject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import http_requests.LoginRequestTask;
+
 /**
  * Created by miaodonghan on 4/10/16.
  */
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public static final String Markup ="markup";
     public static final String Email_s = "email";
     public static final String Password_s = "password";
@@ -114,13 +116,13 @@ public class Login extends AppCompatActivity {
                 String pwd_internal = pwd_login.getText().toString();
 
                 if (email_internal.length() == 0 || pwd_internal.length() == 0) {
-                    Toast.makeText(Login.this, "please input email and password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "please input email and password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 String ip = getString(R.string.ip_address);
 //                SharedPreferences.Editor editor= sharedPreferences.edit();
-                LoginRequestTask loginRequestTask = new LoginRequestTask(Login.this, ip,sharedPreferences);
+                LoginRequestTask loginRequestTask = new LoginRequestTask(LoginActivity.this, ip,sharedPreferences);
                 Log.e("IPPPPPPPPL::", ip + "/api/auth/login");
                 loginRequestTask.execute(email, pwd);
 
@@ -130,8 +132,8 @@ public class Login extends AppCompatActivity {
         regist_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Register.class);
-                Login.this.startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(intent);
             }
         });
 

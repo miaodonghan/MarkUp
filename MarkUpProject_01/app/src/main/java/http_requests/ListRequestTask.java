@@ -1,4 +1,4 @@
-package com.example.miaodonghan.markupproject_01;
+package http_requests;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.example.miaodonghan.markupproject.R;
+import com.example.miaodonghan.markupproject.VersionListActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +25,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-class ListRequestTask extends AsyncTask<String, Integer, List<ListRequestTask.DocumentItem>> {
+public class ListRequestTask extends AsyncTask<String, Integer, List<ListRequestTask.DocumentItem>> {
 
     ListView listview;
     Context context;

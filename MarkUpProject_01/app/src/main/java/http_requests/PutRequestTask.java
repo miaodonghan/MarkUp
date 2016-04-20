@@ -1,9 +1,11 @@
 package http_requests;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
+
+import com.example.miaodonghan.markupproject.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -21,22 +23,26 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
     Context context;
     int doc_id;
     int version_id;
-    EditText editor;
+
     String ip;
+    SharedPreferences sharedPreferences;
+    String token;
 
-
-    public PutRequestTask(Context context, int version_id, EditText editor, String ip, int doc_id) {
+    public PutRequestTask(Context context, int version_id, String ip, int doc_id,SharedPreferences sharedPreferences) {
 
         this.context = context;
         this.version_id = version_id;
-        this.editor = editor;
+
         this.ip = ip;
         this.doc_id = doc_id;
+        this.sharedPreferences =sharedPreferences;
     }
 
     @Override
     protected void onPreExecute() {
         // start a spinning sign
+        token = sharedPreferences.getString(LoginActivity.Token_s,null);
+        Log.i("put:::", token);
     }
 
     @Override
@@ -54,6 +60,9 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
             urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.setRequestProperty("Content-type", "application/json");
             urlConnection.setRequestProperty("charset", "utf-8");
+            urlConnection.setRequestProperty("access_token", token);
+            urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+            urlConnection.setDoOutput(true);
 
             JSONObject jsonParam = new JSONObject();
 
@@ -61,8 +70,7 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
             jsonParam.put("content", data[2]);
 
             String requestData = jsonParam.toString();
-            urlConnection.setRequestProperty("Content-Length", "" +  requestData.getBytes().length);
-            Log.e("------:", requestData.getBytes().length+"");
+            urlConnection.setRequestProperty("Content-Length", "" + requestData.getBytes().length);
             DataOutputStream out = new DataOutputStream(urlConnection.getOutputStream());
 
             out.writeBytes(requestData);
@@ -70,8 +78,6 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
             out.close();
             Log.e("====:", requestData);
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-            Log.e("-----:", "---");
             Scanner s = new Scanner(in).useDelimiter("\\A");
             String res = s.hasNext() ? s.next() : "";
             Log.e("rrrrrr:",res);
@@ -89,8 +95,8 @@ public class PutRequestTask extends AsyncTask<String, Integer, String> {
     //@Override
     protected void onPostExecute(String result) {
 
-        //editor.setText(result);
 
+        Log.i("putt","whether put successfully");
     }
 
 }

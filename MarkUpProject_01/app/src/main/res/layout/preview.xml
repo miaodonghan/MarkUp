@@ -29,5 +29,24 @@
         android:scrollIndicators="bottom|top"
         android:background="#73ce8b" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update"
+        android:id="@+id/createbtn"
+        android:layout_below="@+id/markdownView"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignEnd="@+id/textView1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Version"
+        android:id="@+id/updatebtn"
+        android:layout_toRightOf="@+id/createbtn"
+        android:layout_below="@+id/markdownView"
+        android:layout_toLeftOf="@+id/createbtn"
+        android:layout_toStartOf="@+id/createbtn" />
+
 
 </RelativeLayout>

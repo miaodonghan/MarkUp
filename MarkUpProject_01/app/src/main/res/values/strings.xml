@@ -4,5 +4,5 @@
     <string name="app_register">Sign up</string>
     <string name="app_logout">Log out</string>
     <string name="Markup">Markup</string>
-    <string name="ip_address">http://104.194.126.109:1337</string>
+    <string name="ip_address">http://172.20.20.20:1337</string>
 </resources>

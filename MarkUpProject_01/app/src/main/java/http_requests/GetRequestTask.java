@@ -1,4 +1,4 @@
-package com.example.miaodonghan.markupproject_01;
+package http_requests;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 
-class GetRequestTask extends AsyncTask<String, Integer, String> {
+public class GetRequestTask extends AsyncTask<String, Integer, String> {
 
 
     Context context;

@@ -1,7 +1,9 @@
-package com.example.miaodonghan.markupproject_01;
+package com.example.miaodonghan.markupproject;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnDragListener;
@@ -20,9 +23,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import http_requests.GetRequestTask;
 import http_requests.PostRequestTask;
 import http_requests.PutRequestTask;
 import us.feras.mdv.MarkdownView;
+import utils.Document;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     int version_id;
     String ip;
     public static String editor_content = "";
+    String token;
+    SharedPreferences sharedPreferences;
 
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
@@ -65,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
 //        markdownView.loadMarkdown(editor.getText().toString());
+
+        sharedPreferences = getSharedPreferences(LoginActivity.Markup, Context.MODE_PRIVATE);
 
         savebtn =(Button)findViewById(R.id.save_old);
         savebtn.setOnClickListener(mySaveTtn);
@@ -253,21 +262,30 @@ public class MainActivity extends AppCompatActivity {
         return -1;
     }
 
+
+
+
     View.OnClickListener mySaveTtn = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            PutRequestTask putRequestTask = new PutRequestTask(MainActivity.this,version_id,editor,ip,doc_id);
+            PutRequestTask putRequestTask = new PutRequestTask(MainActivity.this,version_id,ip,doc_id,sharedPreferences);
             String text = editor.getText().toString();
             int start = editor.getLayout().getLineStart(0);
             int end = editor.getLayout().getLineStart(1);
             int cstart =editor.getLayout().getLineStart(2);
             String name = text.substring(start, end);
             String content = text.substring(cstart,text.length());
-            putRequestTask.execute(""+version_id,name,content);
-            //String content = text;
-            //putRequestTask.execute(""+version_id,content);
-            Toast.makeText(MainActivity.this, "save successfully", Toast.LENGTH_LONG).show();
+            String token = sharedPreferences.getString(LoginActivity.Token_s, null);
+            if(token !=null){
+                putRequestTask.execute(""+version_id,name,content);
+                //String content = text;
+                //putRequestTask.execute(""+version_id,content);
+                Toast.makeText(MainActivity.this, "save successfully", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(MainActivity.this, "Please LoginActivity first!", Toast.LENGTH_LONG).show();
+            }
+
         }
     };
     View.OnClickListener mySaveTtn_newversion = new View.OnClickListener() {
@@ -275,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            PostRequestTask postRequestTask = new PostRequestTask(MainActivity.this,editor,ip,doc_id);
+            PostRequestTask postRequestTask = new PostRequestTask(MainActivity.this, ip,doc_id,sharedPreferences);
 
             String text = editor.getText().toString();
             int start = editor.getLayout().getLineStart(0);
@@ -283,10 +301,16 @@ public class MainActivity extends AppCompatActivity {
             int cstart =editor.getLayout().getLineStart(2);
             String name = text.substring(start, end);
             String content = text.substring(cstart,text.length());
-            //putRequestTask.execute(""+version_id,name,content);
-            //String content = text;
-            postRequestTask.execute(name, content);
-            Toast.makeText(MainActivity.this, "you created a new version successfully", Toast.LENGTH_LONG).show();
+            String token = sharedPreferences.getString(LoginActivity.Token_s,null);
+            if(token !=null){
+                //putRequestTask.execute(""+version_id,name,content);
+                //String content = text;
+                postRequestTask.execute(name, content);
+                Toast.makeText(MainActivity.this, "you created a new version successfully", Toast.LENGTH_LONG).show();
+            }else{
+                Toast.makeText(MainActivity.this, "Please LoginActivity first!", Toast.LENGTH_LONG).show();
+            }
+
         }
     };
 
@@ -295,7 +319,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             editor_content = editor.getText().toString();
-            startActivity(new Intent(MainActivity.this, ShowPreview.class));
+            Intent intent = new Intent(MainActivity.this, ShowPreviewActivity.class);
+            intent.putExtra("docId", doc_id);
+            intent.putExtra("versionId",version_id);
+            startActivity(intent);
+            //startActivity(new Intent(MainActivity.this, ShowPreviewActivity.class));
 
         }
     };
@@ -304,6 +332,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.action_settings:
+                Toast.makeText(this, "Goto LoginActivity page", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(this,LoginActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
         return true;
     }
 

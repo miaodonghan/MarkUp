@@ -1,4 +1,4 @@
-package com.example.miaodonghan.markupproject_01;
+package com.example.miaodonghan.markupproject;
 
 import org.junit.Test;
 

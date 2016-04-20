@@ -1,9 +1,11 @@
 package http_requests;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
+
+import com.example.miaodonghan.markupproject.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -20,21 +22,27 @@ public class PostRequestTask extends AsyncTask<String, Integer, String> {
 
     Context context;
     int doc_id;
-    EditText editor;
+
     String ip;
+    String token;
+    SharedPreferences sharedPreferences;
 
 
-    public PostRequestTask(Context context, EditText editor, String ip, int doc_id) {
+    public PostRequestTask(Context context, String ip, int doc_id, SharedPreferences sharedPreferences) {
 
         this.context = context;
-        this.editor = editor;
+
         this.ip = ip;
         this.doc_id = doc_id;
+        this.sharedPreferences =sharedPreferences;
     }
 
     @Override
     protected void onPreExecute() {
         // start a spinning sign
+
+        token = sharedPreferences.getString(LoginActivity.Token_s,null);
+        Log.i("post:::", token);
     }
 
     @Override
@@ -53,14 +61,18 @@ public class PostRequestTask extends AsyncTask<String, Integer, String> {
             urlConnection.setRequestProperty("Content-type", "application/json");
             urlConnection.setRequestProperty("charset", "utf-8");
 
+            urlConnection.setRequestProperty("access_token", token);
+            urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+            urlConnection.setDoOutput(true);
+
+
             JSONObject jsonParam = new JSONObject();
             //body
             jsonParam.put("name", data[0]);
             jsonParam.put("content", data[1]);
 
             String requestData = jsonParam.toString();
-            urlConnection.setRequestProperty("Content-Length", "" +  requestData.getBytes().length);
-            Log.e("------:", requestData.getBytes().length + "");
+            urlConnection.setRequestProperty("Content-Length", "" + requestData.getBytes().length);
             DataOutputStream out = new DataOutputStream(urlConnection.getOutputStream());
 
             out.writeBytes(requestData);
@@ -85,7 +97,7 @@ public class PostRequestTask extends AsyncTask<String, Integer, String> {
     //@Override
     protected void onPostExecute(String result) {
 
-        //editor.setText(result);
+
 
     }
 

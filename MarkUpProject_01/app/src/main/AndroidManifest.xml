@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.miaodonghan.markupproject_01" >
+    package="com.example.miaodonghan.markupproject" >
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--
@@ -12,12 +12,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        <activity android:name="com.example.miaodonghan.markupproject.MainActivity" >
 
         </activity>
 
         <activity
-            android:name=".DocumentListActivity">
+            android:name="com.example.miaodonghan.markupproject.DocumentListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,16 +25,16 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".VersionListActivity" >
+        <activity android:name="com.example.miaodonghan.markupproject.VersionListActivity" >
 
         </activity>
-        <activity android:name=".ShowPreview" >
+        <activity android:name=".ShowPreviewActivity" >
 
         </activity>
-        <activity android:name=".Login" >
+        <activity android:name=".LoginActivity" >
 
         </activity>
-        <activity android:name=".Register" >
+        <activity android:name=".RegisterActivity" >
 
         </activity>
     </application>
