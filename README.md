@@ -8,8 +8,8 @@
 > Migrate this project
 
 
- ### Android project fornt end:
-  
+### Android project fornt end:
+
   * Download Android Studio from  http://developer.android.com/sdk/index.html, (MY VERSION is 1.5)
   * Gradle config: 
    * compileSdkVersion : 23
@@ -19,5 +19,5 @@
       *  compile 'us.feras.mdv:markdownview:1.1.0'
       *compile 'org.apache.httpcomponents:httpclient:4.5'
 
-  ### web service back end:
+### web service back end:
   * Download sails.js from https://www.npmjs.com/package/sails
